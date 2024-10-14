@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title_head %}
+Sube tu recomendacion
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0">Sube tu anime recomendado </h1>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+
+
+<form action="{% url "subir_recomendacion" %}">
+    
+    <input type="text">
+
+</form>
+
+
+
+{% comment %} <h2>{{fecha_actual}}</h2>
+
+<img src={% static "assets/img/shingeki2.jpg" %} alt=""> {% endcomment %}
+
+
+
+
+{% endblock main %}
