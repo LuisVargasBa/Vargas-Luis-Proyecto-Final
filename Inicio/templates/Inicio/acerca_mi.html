@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_head %}
+About me
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0"> </h1>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+
+{% block main %}
+        <section id="scroll">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6 order-lg-2">
+                        <div class="p-5"><img class="img-fluid rounded-circle" src= {% static "assets/img/ace.jpg" %} alt="..." /></div>
+                    </div>
+                    <div class="col-lg-6 order-lg-1">
+                        <div class="p-5">
+                            <h2 class="display-4">Acerca de mi</h2>
+                            <p>Esta es mi primera vez trabajando con lenguajes de programación. Mi profesion actual es de abogado
+                               pero siempre me llamo la atención el tema de la informática y como funcionan las webs, los programas y los juegos, 
+                               por lo que este curso es una oportunidad para poder empezar con los lenguajes de programación y tratar de entender
+                               como se van creando las páginas web tanto en el front como en el end. Gracias al curso he aprendido mucho y a pesar 
+                               que hay algunas cosas que aún me cuestan, es muy divertido.
+                            </p>
+                                                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock main %}

@@ -13,21 +13,24 @@ Sube tu recomendacion
 {% block contenido_pagina %}{% endblock contenido_pagina %}
 
 {% block main %}
-
-
-<form action="{% url "subir_recomendacion" %}">
-    
-    <input type="text">
-
-</form>
-
-
-
-{% comment %} <h2>{{fecha_actual}}</h2>
-
-<img src={% static "assets/img/shingeki2.jpg" %} alt=""> {% endcomment %}
-
-
-
-
+<section id="scroll">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/miko1.gif"%} alt="..." /></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <form action="{% url "Inicio:subir_recomendacion" %}" method="POST">
+                        {% csrf_token %}
+                        {{form}}
+                        <input type="submit" value="Ingresar">
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock main %}
+

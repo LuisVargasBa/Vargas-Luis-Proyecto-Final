@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title_head %}
+Recomendacion ingresada
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0">Recomendación ingresada correctamente </h1>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+
+<section>
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/mikogg.gif"%} alt="..." /></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4">Gracias por mandar tu recomendación</h2>
+                    <p>Las recomendaciones ingresadas pueden ser visualizadas por todos nuestros usuarios</p>
+
+                    <form method="get" action="{% url 'Inicio:inicio' %}">
+                        <input type="submit" value="Regresar al Inicio">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main %}
+
+

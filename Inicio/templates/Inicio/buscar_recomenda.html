@@ -11,9 +11,26 @@ Busca una recomendacion
 
 {% block main %}
 
-<form action="{% url "buscar_recomendacion" %}">
-    
+<p>Complete uno o mas campos para la búsqueda
+   y poder conocer las recomendaciones ingresadas
+</p>
 
+<form action="{% url "Inicio:buscar_recomendacion" %}">
+    {{form}}
+    <input type="submit">
 </form>
+
+<p>LISTA DE ANIMES INGRESADOS</p>
+
+{% if animes %}
+<ul>
+    {% for anime in animes %}
+    <li>{{anime}}         
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay animes registrados aún.</p>
+{% endif %}
 
 {% endblock main %}
