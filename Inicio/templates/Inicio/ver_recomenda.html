@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title_head %}
+Ver recomendacion
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0"> Ver mas informacion de {{anime.nombre}} </h1>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+
+{% block main %}
+        
+<div class="row gx-5 align-items-center justify-content-center text-center">
+   
+    {% if anime.imagen %}
+        <img src="{{ anime.imagen.url }}" alt="{{ anime.nombre }}" class="anime-imagen" style="height: 400px; width: 400px;">
+    {% else %}
+        <p> No se ha ingresado una imagen para este anime</p>
+    {% endif %}
+
+    <ul class="container my-5">
+        <li><strong>Nombre:</strong> {{ anime.nombre }}</li>
+        <li><strong>Género:</strong> {{ anime.genero }}</li>
+        <li><strong>Personaje reconocido del anime:</strong> {{ anime.personaje }}</li>
+        <li><strong>Puntuación otorgada:</strong> {{ anime.puntuacion }}</li>
+        <li><strong>Fecha de emisión:</strong> {{ anime.fecha_de_emision }}</li>
+    </ul>
+       
+</div>
+
+<div class="container my-5">
+    <a href="{% url 'Inicio:buscar_recomendacion' %}" class="btn btn-primary regresar-btn">Regresar a la lista</a>
+</div>
+
+{% endblock main %}

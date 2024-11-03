@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title_head %}
+Eliminar recomendacion
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0"> ¿Estas seguro que deseas eliminar el registro de {{anime.nombre}}? </h1>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+<section id="scroll">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/mikowhat.gif"%} alt="..." /></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <form action="{% url "Inicio:eliminar_recomendacion" anime.id %}" method="POST">
+                        {% csrf_token %}
+                        
+                        <input type="submit" class="btn btn-danger" value="Confirmar" style="height: 80px; width: 150px;">
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock main %}
+

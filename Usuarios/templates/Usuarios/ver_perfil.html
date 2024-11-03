@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Tu perfil
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0">Bienvenido {{usuario.username}}!
+        Aqui puedes revisar tus datos o editarlos
+    </h1>
+    <h2 class="masthead-subheading mb-0">
+        Además revisa tu bandeja de mensajes y envia mensajes a otros usuarios
+    </h2>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+
+<div class="container px-3">
+    <div class="row gx-5 align-items-center">
+        <div class="col-lg-6">
+            
+        {% if avatar %}
+        <img src="{{ avatar.url }}" alt="Avatar de {{ usuario.username }}" width="200" height="200">
+        {% else %}
+        <p>No has subido un avatar aún</p>
+        {% endif %}
+
+        <p><strong>Correo Electrónico:</strong> {{ usuario.email }}</p>
+        <p><strong>Nombre:</strong> {{ usuario.first_name }}</p>
+        <p><strong>Apellido:</strong> {{ usuario.last_name }}</p>
+
+        {% if favorito %}
+        <p><strong>Géneros de Anime Favoritos:</strong> {{ favorito }}</p>
+        {% else %}
+        <p>Aún no has ingresado tus géneros de anime favoritos</p>
+        {% endif %}
+
+        <a href="{% url 'Usuarios:editar_perfil' %}" class="btn btn-secondary"> Editar perfil </a>
+
+
+        <a href="{% url 'Mensajes:bandeja_mensajes' %}" class="btn btn-primary"> Revisar y enviar mensajes </a>
+
+        <a href="{% url 'Inicio:inicio' %}" class="btn btn-success"> Regresar al Inicio </a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock main %}

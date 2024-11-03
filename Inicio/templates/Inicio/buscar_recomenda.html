@@ -11,26 +11,48 @@ Busca una recomendacion
 
 {% block main %}
 
-<p>Complete uno o mas campos para la búsqueda
-   y poder conocer las recomendaciones ingresadas
-</p>
+<div class="row gx-5 align-items-center justify-content-center text-center">
+    <p class="display-4 text-success">
+        Complete uno o más campos de la búsqueda y poder conocer las recomendaciones ingresadas
+    </p>
+</div>
 
-<form action="{% url "Inicio:buscar_recomendacion" %}">
-    {{form}}
-    <input type="submit">
-</form>
+<div class="container my-4">
+    <form action="{% url 'Inicio:buscar_recomendacion' %}" class="ms-3" style="max-width: 500px;">
+        {{ form }}
+        <input type="submit" class="btn btn-primary">
+    </form>
+</div>
 
-<p>LISTA DE ANIMES INGRESADOS</p>
+<div class="row gx-5 align-items-center justify-content-center text-center">
+    <p class="display-4 text-danger">
+        LISTA DE ANIMES REGISTRADOS
+    </p>
+</div>
 
-{% if animes %}
-<ul>
-    {% for anime in animes %}
-    <li>{{anime}}         
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
-<p>No hay animes registrados aún.</p>
-{% endif %}
+<div class="container my-4">
+    {% if animes %}
+    <ul class="ms-3" style="max-width: 600px;">
+        {% for anime in animes %}
+        <li>{{anime}}   <a href="{% url "Inicio:ver_recomendacion" anime.id %}" class="btn btn-primary">Ver más</a> 
+                        {% if anime.user == request.user %}
+                        <a href="{% url 'Inicio:editar_recomendacion' anime.id %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'Inicio:eliminar_recomendacion' anime.id %}" class="btn btn-danger">Eliminar</a>
+                        {% endif %}          
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No hay animes registrados aún.</p>
+    {% endif %}
+</div>    
+
+<div class="row gx-5 align-items-center justify-content-center text-center">
+    <p class="fs-4">
+        * El campo puntuacion se encuentra en un rango del 1 al 10, siendo 10 una recomendacion que todos deberian ver y
+        1 para un anime que no le mostrarías a nadie.
+    </p>
+</div>
 
 {% endblock main %}
+

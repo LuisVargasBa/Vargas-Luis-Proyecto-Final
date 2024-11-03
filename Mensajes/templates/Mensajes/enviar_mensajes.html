@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Enviar mensaje
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0">Enviar mensaje </h1>
+    <h2 class="masthead-subheading mb-0">Ingresa el mensaje que deseas enviar a otro usuario</h2>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+
+<h2>Enviar Mensaje</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+<a href="{% url 'Mensajes:bandeja_mensajes' %}" class="btn btn-secondary"> Regresar a la bandeja de mensajes </a>
+
+{% endblock main %}

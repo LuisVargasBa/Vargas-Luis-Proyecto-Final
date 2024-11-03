@@ -1,29 +1,28 @@
-from django.http import HttpResponse
 from django.template import Template, Context, loader
 from django.shortcuts import render, redirect
 from Inicio.models import Anime
-from Inicio.forms import IngresarAnime, BuscarAnime
+from Inicio.forms import BaseFormAnime, BuscarAnime, EditarAnime, IngresarAnime
+from django.contrib.auth.decorators import login_required
+from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.detail import DetailView
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def inicio(request):
     return render(request, 'Inicio/index.html')
     
 
-def subir_recomendacion(request):
+class CrearRecomenda(LoginRequiredMixin, CreateView):
+    model = Anime
+    template_name = "Inicio/subir_recomenda.html"
+    success_url = reverse_lazy("Inicio:ingreso_correcto")
+    form_class = BaseFormAnime
     
-    formulario = IngresarAnime()
-    
-    if request.method == "POST":
-        formulario = IngresarAnime(request.POST)
-        if formulario.is_valid():
-            data = formulario.cleaned_data
-            anime_ingresado = Anime(nombre= data.get("nombre"), genero=data.get("genero"), personaje=data.get("personaje"), anio=data.get("anio"))
-            anime_ingresado.save()
-            return redirect ("Inicio:ingreso_correcto")
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
         
-    return render(request, 'Inicio/subir_recomenda.html', {'form': formulario})
-       
-    
 def buscar_recomendacion(request):
     
     formulario = BuscarAnime(request.GET)
@@ -38,6 +37,45 @@ def buscar_recomendacion(request):
 def ingreso_correcto(request):
     return render(request, 'Inicio/ingreso_correcto.html')
 
+class ListaRecomenda(DetailView):
+    model = Anime
+    template_name = "Inicio/ver_recomenda.html"
+
+     
+class EliminarRecomenda(LoginRequiredMixin, DeleteView):
+    model = Anime
+    template_name = "Inicio/eliminar_recomenda.html"
+    success_url = reverse_lazy("Inicio:buscar_recomendacion")
+
+@login_required
+def editar_recomenda(request, id):
+    anime = Anime.objects.get(id=id)
+    
+    formulario = EditarAnime(initial={
+        "nombre": anime.nombre, 
+        "genero": anime.genero,
+        "personaje": anime.personaje,
+        "puntuacion": anime.puntuacion,
+        "fecha_de_emision": anime.fecha_de_emision,
+        "imagen": anime.imagen,
+    })
+           
+    if request.method == "POST":
+        formulario = EditarAnime(request.POST, request.FILES, instance=anime)
+        if formulario.is_valid():
+            anime.nombre = formulario.cleaned_data.get("nombre")
+            anime.genero = formulario.cleaned_data.get("genero")
+            anime.personaje = formulario.cleaned_data.get("personaje")
+            anime.puntuacion = formulario.cleaned_data.get("puntuacion")
+            anime.fecha_de_emision = formulario.cleaned_data.get("fecha_de_emision")
+            anime.imagen = formulario.cleaned_data.get("imagen")
+            
+            anime.save()
+
+            return redirect('Inicio:buscar_recomendacion')
+        
+    return render(request, 'Inicio/editar_recomenda.html', {'anime': anime, 'form': formulario})
+    
 
 def acerca_mi(request):
     return render(request, 'Inicio/acerca_mi.html')

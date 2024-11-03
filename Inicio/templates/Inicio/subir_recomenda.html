@@ -3,11 +3,11 @@
 
 
 {% block title_head %}
-Sube tu recomendacion
+Subir recomendacion
 {% endblock title_head %}
 
 {% block Titulo_pagina %}
-    <h1 class="masthead-heading mb-0">Sube tu anime recomendado </h1>
+    <h1 class="masthead-heading mb-0">Ingresa los datos del anime que deseas recomendar </h1>
 {% endblock Titulo_pagina %}
 
 {% block contenido_pagina %}{% endblock contenido_pagina %}
@@ -17,17 +17,25 @@ Sube tu recomendacion
     <div class="container px-5">
         <div class="row gx-5 align-items-center">
             <div class="col-lg-6 order-lg-2">
-                <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/miko1.gif"%} alt="..." /></div>
+                <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/a1.gif"%} alt="..." /></div>
             </div>
             <div class="col-lg-6 order-lg-1">
                 <div class="p-5">
-                    <form action="{% url "Inicio:subir_recomendacion" %}" method="POST">
+                    <form action="{% url "Inicio:subir_recomendacion" %}" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{form}}
-                        <input type="submit" value="Ingresar">
+                        <input type="submit" class="btn btn-primary" value="Ingresar">
                     </form>
                     
                 </div>
+
+                <p class="masthead-heading mb-0">
+                    * Para el campo puntuacion, ingresa tu puntuacion personal para tu recomendacion
+                    en un rango del 1 al 10, siendo 10 una recomendacion que todos deberian ver y
+                    1 para un anime que no le mostrarías a nadie.
+                </p>
+
+
             </div>
         </div>
     </div>

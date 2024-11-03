@@ -32,10 +32,29 @@
                 <a class="navbar-brand" href={% url "Inicio:buscar_recomendacion" %}>Buscar recomendacion</a>
                 <a class="navbar-brand" href={% url "Inicio:acerca_mi" %}>Acerca de mi</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                {% if request.user.is_authenticated %}
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        {% comment %} <li class="nav-item"><a class="nav-link" href="#!">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Log In</a></li> {% endcomment %}
+                        <li class="nav-item"> <a class="btn btn-outline-secondary" href= {% url "Usuarios:ver_perfil" %}>
+                            {% if request.user.avatarperfil.avatar %}
+                            <img src="{{ request.user.avatarperfil.avatar.url }}" alt="" height="45px">
+                            {% else %}
+                            <img src="{% static "assets/img/avatar.jpg"%}" alt="" height="45px">
+                            {% endif %}
+                            {{ request.user.username }}
+                            </a>
+                        </li>
+                        <form action= {% url "Usuarios:logout" %} method="post">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-primary ml-2" value="Logout" style="height: 60px; width: 90px;">
+                        </form>
+                {% else %}
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="btn btn-outline-secondary" href= {% url "Usuarios:login" %}>Login</a></li>
+                        <li class="nav-item"><a class="btn btn-primary ml-2" href= {% url "Usuarios:registro" %}>Registrarse</a></li>
+                {% endif %}
+                                      
                     </ul>
                 </div>
             </div>
@@ -63,12 +82,14 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/naruto.jpg"%} alt="..." /></div>
+                        <a href= {% url "Inicio:subir_recomendacion" %}>
+                        <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/anime2.jpg"%} alt="..." style="height: 400px; width: 600px;" /></div>
+                        </a>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <h2 class="display-4">Sube una recomendacion</h2>
-                            <p>Dejanos la recomendacion para tu anime recomendado</p>
+                            <h2 class= "display-1">Sube una recomendacion</h2>
+                            <p class= "fs-4">Dejanos la recomendacion de tu anime favorito</p>
                             
                         </div>
                     </div>
@@ -81,12 +102,14 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/onepiece.jpg"%} alt="..." /></div>
+                        <a href= {% url "Inicio:buscar_recomendacion" %}>
+                        <div class="p-5"><img class="img-fluid rounded-circle" src={% static "assets/img/ame1.jpg"%} alt="..." style="height: 400px; width: 500px;"/></div>
+                        </a>
                     </div>
                     <div class="col-lg-6">
                         <div class="p-5">
-                            <h2 class="display-4">Revisa las recomendaciones</h2>
-                            <p>Busca las recomendaciones remitidas por nuestros usuarios!</p>
+                            <h2 class= "display-1">Revisa las recomendaciones</h2>
+                            <p class= "fs-4">Busca las recomendaciones ingresadas por nuestros usuarios!</p>
                         </div>
                     </div>
                 </div>
@@ -97,12 +120,14 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center">
                     <div class="col-lg-6 order-lg-2">
-                        <div class="p-5"><img class="img-fluid rounded-circle" src= {% static "assets/img/bocchi.jpg"%} alt="..." /></div>
+                        <a href= {% url "Inicio:acerca_mi" %}>
+                        <div class="p-5"><img class="img-fluid rounded-circle" src= {% static "assets/img/miko1.gif"%} alt="..." style="height: 200px; width: 200px;"/></div>
+                        </a>
                     </div>
                     <div class="col-lg-6 order-lg-1">
                         <div class="p-5">
-                            <h2 class="display-4">About me</h2>
-                            <p>Acerca del creador de la página</p>
+                            <h2 class= "display-3">About me</h2>
+                            <p class= "fs-4">Acerca del creador de la página</p>
                         </div>
                     </div>
                 </div>

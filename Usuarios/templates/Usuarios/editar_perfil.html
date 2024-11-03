@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block title_head %}
+Editar perfil
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0">Edita los datos de tu perfil</h1>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+
+<form action= {% url "Usuarios:editar_perfil" %} method ="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{form}}
+    <input type="submit" class="btn btn-success" value= "Editar" >
+    
+</form>
+
+<a href="{% url "Usuarios:cambiar_password" %}" class="btn btn-secondary"> Cambiar contraseña </a>
+
+<a href="{% url 'Usuarios:ver_perfil' %}" class="btn btn-primary"> Regresar al perfil </a>
+
+{% endblock main %}

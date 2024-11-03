@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title_head %}
+Inbox
+{% endblock title_head %}
+
+{% block Titulo_pagina %}
+    <h1 class="masthead-heading mb-0">Bandeja de mensajes </h1>
+    <h2 class="masthead-subheading mb-0">Revisa los mensajes que recibistes de otros usuarios</h2>
+{% endblock Titulo_pagina %}
+
+{% block contenido_pagina %}{% endblock contenido_pagina %}
+
+{% block main %}
+
+<div class="container px-1">
+    <div class="row gx-5 align-items-center">
+        <div class="col-lg-6">
+            
+            <p>Cantidad de mensajes: {{ mensajes|length }}</p>
+            <ul>
+                {% for mensaje in mensajes %}
+                <li>
+                    <strong>{{ mensaje.usuario_envia.username }}</strong>: {{ mensaje.contenido_mensaje }}
+                    <em>{{ mensaje.hora_mensaje }}</em>
+                </li>
+                {% empty %}
+                <li>No tienes mensajes</li>
+                {% endfor %}
+            </ul>
+            
+            <a href="{% url 'Mensajes:enviar_mensajes' %}" class="btn btn-primary"> Envia un mensaje </a>
+            
+            <a href="{% url 'Usuarios:ver_perfil' %}" class="btn btn-danger"> Regresar a tu perfil</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock main %}

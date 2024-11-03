@@ -10919,3 +10919,54 @@ header.masthead .bg-circle-4 {
     font-size: 4rem;
   }
 }
+
+
+/* Estilo para el contenedor general */
+.anime-info-container {
+  max-width: 600px;          /* Ajusta el ancho máximo según lo necesites */
+  margin: 20px auto;         /* Centra el contenedor */
+  padding: 20px;
+  border: 1px solid #ddd;    /* Borde para delimitar el contenedor */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  text-align: left;
+}
+
+/* Estilo para la lista de información */
+.anime-info-list {
+  list-style: none;          /* Quita los puntos de la lista */
+  padding: 0;
+}
+
+.anime-info-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;  /* Línea divisoria entre elementos */
+}
+
+/* Imagen del anime */
+.anime-imagen {
+  display: block;
+  width: 100%;
+  max-width: 300px;           /* Ajusta el tamaño máximo de la imagen */
+  height: auto;
+  margin: 0 auto 20px;       /* Centra la imagen y agrega espacio inferior */
+  border-radius: 8px;
+}
+
+/* Botón de regresar */
+.regresar-btn {
+  display: block;
+  text-align: center;
+  margin: 20px auto 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.regresar-btn:hover {
+  background-color: #0056b3; /* Color del botón al pasar el mouse */
+}
